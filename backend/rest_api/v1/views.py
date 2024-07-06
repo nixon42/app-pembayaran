@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from django.http import HttpResponse
-from rest_framework import permissions, viewsets, response
+from rest_framework import permissions, viewsets, response, status
 
 from v1.models import Pembayaran, Siswa
 from v1.serializers import GroupSerializer, UserSerializer, PembayaranSerializer, SiswaSerializer
@@ -59,3 +59,25 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
     def get(self, request):
         serializer = self.serializer_class(request.user, context={'request': request})
         return response.Response(serializer.data)
+
+
+class PembayaranSiswaViewSet(viewsets.GenericViewSet):
+    """
+    API endpoint that allows pembayaran by siswa to be viewed.
+    """
+    
+    # permission_classes = []
+    serializer_class = PembayaranSerializer
+
+    def get_queryset(self):
+        return Pembayaran.objects.all()
+    
+
+    def get(self, request, nomorinduksiswa):
+        siswa = Siswa.objects.filter(nomorinduk=nomorinduksiswa).first()
+        if not siswa:
+            return response.Response({'error': 'Siswa not found'}, status=status.HTTP_404_NOT_FOUND)
+        pembayarans = Pembayaran.objects.filter(siswa=siswa)
+        serializer = self.serializer_class(pembayarans, many=True, context={'request': request})
+
+        return response.Response({'results': serializer.data}, status=status.HTTP_200_OK)

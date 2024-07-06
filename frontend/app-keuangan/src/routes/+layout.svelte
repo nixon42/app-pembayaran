@@ -25,8 +25,8 @@
 					About
 				</a>
 				<a class="btn btn-sm variant-ghost-surface" href="/siswa" rel="noreferrer"> Siswa </a>
-				<a class="btn btn-sm variant-ghost-surface" href="/pembayaran" rel="noreferrer"> Pembayaran </a>
-				<a class="btn btn-sm variant-filled-primary" href="/login" rel="noreferrer"> Login </a>
+				<!-- <a class="btn btn-sm variant-ghost-surface" href="/pembayaran" rel="noreferrer"> Pembayaran </a> -->
+				<!-- <a class="btn btn-sm variant-filled-primary" href="/login" rel="noreferrer"> Login </a> -->
 				{#if user}
 					<a class="btn btn-sm variant-filled-error" href="/logout" rel="noreferrer"> Logout </a>
 					<Avatar width="w-8" initials="K" background="bg-primary-500" />

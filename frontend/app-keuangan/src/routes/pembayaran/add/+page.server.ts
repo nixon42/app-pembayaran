@@ -17,7 +17,7 @@ export const actions: Actions = {
         
         let pembayaran:PembayaranModel = {
             id: 0,
-            jumlah: ,
+            jumlah: 0,
             detailpembayaran: '',
             namabendahara: '',
             namasiswa: '',

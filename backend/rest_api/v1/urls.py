@@ -14,6 +14,7 @@ router.register(r'siswa', views.SiswaViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
+    path('lihatpembayaran/<str:nomorinduksiswa>/',views.PembayaranSiswaViewSet.as_view({'get': 'get'})),
     path('auth/user/',views.CurrentUserViewSet.as_view({'get': 'get'})),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

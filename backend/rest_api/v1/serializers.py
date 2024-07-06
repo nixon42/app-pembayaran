@@ -5,7 +5,16 @@ from v1.models import Pembayaran, Siswa
 class PembayaranSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pembayaran
-        fields = ['url', 'created', 'jumlah', 'detail', 'siswa', 'bendahara', 'tglbayar']
+        fields = ['url', 'created', 'jumlah', 'detail', 'siswa', 'bendahara', 'tglbayar', 'siswaname', 'bendaharaname']
+
+    siswaname = serializers.SerializerMethodField()
+    bendaharaname = serializers.SerializerMethodField()
+
+    def get_siswaname(self, obj):
+        return obj.siswa.nama
+
+    def get_bendaharaname(self, obj):
+        return obj.bendahara.username
 
 class SiswaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
